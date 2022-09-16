@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rrFSfUp5qUyDyLvdBv8v4qiQ6cGCWjnP4f5StmbFBMx6fG+/vihnSilbqtWFFG9BeAuCGZztcMnEMr/Bee2jTA==",
+  "dgSpecHash": "rn6o1vUGxD69PyUHHRIDD0tdLiApvOOC0X6ufRFb/1qEXOr5bFnCQ/T6uoyQ7kvLD3Hpsbvd1XoiiERhmiV06Q==",
   "success": true,
-  "projectFilePath": "C:\\testaus\\university\\university.csproj",
+  "projectFilePath": "C:\\bootcamp_examples\\university\\university.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pekka\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\pekka\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

@@ -229,11 +229,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\testaus\\university\\university.csproj",
+      "projectUniqueName": "C:\\bootcamp_examples\\university\\university.csproj",
       "projectName": "university",
-      "projectPath": "C:\\testaus\\university\\university.csproj",
+      "projectPath": "C:\\bootcamp_examples\\university\\university.csproj",
       "packagesPath": "C:\\Users\\pekka\\.nuget\\packages\\",
-      "outputPath": "C:\\testaus\\university\\obj\\",
+      "outputPath": "C:\\bootcamp_examples\\university\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pekka\\AppData\\Roaming\\NuGet\\NuGet.Config",
