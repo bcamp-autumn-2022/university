@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Exercise9;
+using university.Models;
 
 namespace Exercise9.Controllers
 {
@@ -15,7 +11,10 @@ namespace Exercise9.Controllers
         public string GetStudents(){
             //Student objectStudent=new Student();
             //string results=objectStudent.GetAllStudents();
-            return "This will return all students";
+            Student objStudent=new Student(); 
+            string result=objStudent.GetAllStudents();
+            Console.WriteLine(result);
+            return result;
         }
         [HttpGet("{id}")]
         public string GetOneStudent(int id){
