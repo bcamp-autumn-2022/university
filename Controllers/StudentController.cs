@@ -18,8 +18,12 @@ namespace Exercise9.Controllers
         }
         [HttpGet("{id}")]
         public string GetOneStudent(int id){
-  
-            return "This will return student which id="+id;;
+            Student objStudent=new Student();
+            string result=objStudent.GetOneStudent(id);
+            if(result.Length==0){
+                result="Student not found";
+            }
+            return result;
         }
         [HttpPost()]
         public string AddStudent(){
@@ -27,7 +31,7 @@ namespace Exercise9.Controllers
         }
         [HttpPut("{id}")]
         public string UpdateStudent(int id){
-            return "This will update student which  id="+id;
+            return "This will update student which  ID = "+id;
         }
         
         [HttpDelete("{id}")]
