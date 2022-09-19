@@ -22,7 +22,7 @@ namespace Exercise9.Controllers
             string result=objStudent.GetOneStudent(id);
             if(result.Length==0){
                 result="Student not found";
-                return NotFound(result);
+                return NoContent();
             }
             return Ok(result);
         }
