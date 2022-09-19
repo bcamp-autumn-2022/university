@@ -17,13 +17,14 @@ namespace Exercise9.Controllers
             return result;
         }
         [HttpGet("{id}")]
-        public string GetOneStudent(int id){
+        public IActionResult GetOneStudent(int id){
             Student objStudent=new Student();
             string result=objStudent.GetOneStudent(id);
             if(result.Length==0){
                 result="Student not found";
+                return NotFound(result);
             }
-            return result;
+            return Ok(result);
         }
         [HttpPost()]
         public string AddStudent(){
