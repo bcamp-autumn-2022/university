@@ -112,7 +112,7 @@ CREATE TABLE `grade` (
   CONSTRAINT `cource_grade` FOREIGN KEY (`idcourse`) REFERENCES `course` (`idcourse`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `student_grade` FOREIGN KEY (`idstudent`) REFERENCES `student` (`idstudent`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `teacher_grade` FOREIGN KEY (`idteacher`) REFERENCES `teacher` (`idteacher`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +121,7 @@ CREATE TABLE `grade` (
 
 LOCK TABLES `grade` WRITE;
 /*!40000 ALTER TABLE `grade` DISABLE KEYS */;
-INSERT INTO `grade` VALUES (1,'2022-09-20',2,3,200,4);
+INSERT INTO `grade` VALUES (1,'2022-09-20',2,3,200,4),(2,'2022-09-21',2,3,201,4),(3,'2022-09-20',2,3,201,5);
 /*!40000 ALTER TABLE `grade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,8 +192,9 @@ CREATE TABLE `user` (
   `identity` int DEFAULT NULL,
   `firstname` varchar(45) DEFAULT NULL,
   `lastname` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+  PRIMARY KEY (`iduser`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,7 +203,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'user01','pass1',1,'Lisa','Admin1'),(2,'user02','pass2',2,'Bob','Student1'),(3,'user03','pass3',3,'Ann','Teacher1');
+INSERT INTO `user` VALUES (1,'user01','pass1',1,'Lisa','Admin1'),(2,'user02','pass2',2,'Bob','Student1'),(3,'user4','$2a$11$FqU8KxB4if.DfXufHOYsUO35q2CRFvPNmopfAcBBu3pKKC5pT3MnS',3,'Ann','Teacher1'),(5,'user05','$2a$11$5bANriWpp9cFkxYiP93MiOttJp1Jel0AVXVzlPLzagiEVuNGzNdhi',2,'Jussi','Testi'),(9,'user07','$2a$11$dWh2.AIe13ymslkZRS.wc.oE8RzhKFFN/o4Szt9vqzHlCVYLykjRS',3,'Matti','Mainio');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -215,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-20 10:27:54
+-- Dump completed on 2022-09-20 15:42:42
