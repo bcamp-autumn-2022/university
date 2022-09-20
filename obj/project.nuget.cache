@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "rn6o1vUGxD69PyUHHRIDD0tdLiApvOOC0X6ufRFb/1qEXOr5bFnCQ/T6uoyQ7kvLD3Hpsbvd1XoiiERhmiV06Q==",
+  "dgSpecHash": "VHabd/lLvNt1Wgon2CrhMp/YXVlfp+Zi4QnbT6vohWpnFA5tWPfK5aahEOazSAr/EzEewEh/z+uzi8kMLD0sRQ==",
   "success": true,
   "projectFilePath": "C:\\bootcamp_examples\\university\\university.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pekka\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\pekka\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\pekka\\.nuget\\packages\\mysqlconnector\\2.1.13\\mysqlconnector.2.1.13.nupkg.sha512",
     "C:\\Users\\pekka\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\pekka\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\pekka\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
