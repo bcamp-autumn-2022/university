@@ -52,3 +52,5 @@ C:\bootcamp_examples\university\obj\Debug\net6.0\refint\university.dll
 C:\bootcamp_examples\university\obj\Debug\net6.0\university.pdb
 C:\bootcamp_examples\university\obj\Debug\net6.0\university.genruntimeconfig.cache
 C:\bootcamp_examples\university\obj\Debug\net6.0\ref\university.dll
+C:\bootcamp_examples\university\bin\Debug\net6.0\BCrypt.Net-Next.dll
+C:\bootcamp_examples\university\bin\Debug\net6.0\MySqlConnector.dll

@@ -61,13 +61,15 @@ namespace university
         public async Task<int> InsertAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"INSERT INTO  user  (iduser,username,password,identity,firstname,lastname) VALUES (@iduser,@username,@password,@identity,@firstname,@lastname);";
+            cmd.CommandText=@"insert into user(iduser,username,password,identity,firstname,lastname) 
+            values(@iduser,@username,@password,@identity,@firstname,@lastname);";
             BindParams(cmd);
+            BindId(cmd);
             try
             {
                 await cmd.ExecuteNonQueryAsync();
-                int iduser = (int) cmd.LastInsertedId;
-                return iduser; 
+                int lastInsertId = (int) cmd.LastInsertedId; 
+                return lastInsertId;
             }
             catch (System.Exception)
             {   
