@@ -31,9 +31,11 @@ namespace university.Controllers
             await Db.Connection.OpenAsync();
             var query = new User(Db);
             var result = await query.FindOneAsync(id);
+            Console.WriteLine(result);
             if (result is null)
                 return new NotFoundResult();
             return new OkObjectResult(result);
+            
         }
 
         // POST api/User
@@ -45,6 +47,9 @@ namespace university.Controllers
             body.Db = Db;
             int result=await body.InsertAsync();
             Console.WriteLine("inserted id="+result);
+            if(result == 0){
+                return new ConflictObjectResult(0);
+            }
             return new OkObjectResult(result);
         }
 
