@@ -19,9 +19,9 @@ namespace university.Controllers
             Console.WriteLine(body.password);
             await Db.Connection.OpenAsync();
             var query = new Login(Db);
-            var passwordFromTheDtabase = await query.GetPassword(body.username);
+            var dataFromDb = await query.GetPassword(body.username);
    
-            if (passwordFromTheDtabase is null || ! BCrypt.Net.BCrypt.Verify(body.password, passwordFromTheDtabase))
+            if (dataFromDb is null || ! BCrypt.Net.BCrypt.Verify(body.password, dataFromDb.password))
             {
                 // authentication failed
                 return new OkObjectResult(false);
@@ -29,7 +29,7 @@ namespace university.Controllers
             else
             {
                 // authentication successful
-                return new OkObjectResult(true);
+                return new OkObjectResult(dataFromDb.identity);
             }
             
         }
