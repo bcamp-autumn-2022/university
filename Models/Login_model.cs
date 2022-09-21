@@ -8,7 +8,8 @@ namespace university
 {
     public class Login
     {
-        public string username { get; set; }
+        //public string username { get; set; }
+        //we don't need the username in Login class
         public string password { get; set; }
 
         internal Database Db { get; set; }
