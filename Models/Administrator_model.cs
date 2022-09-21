@@ -90,12 +90,14 @@ namespace university
             } 
         }
 
-        public async Task UpdateAsync()
+        public async Task UpdateAsync(int actual_id, int new_id, string new_catgory)
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"UPDATE  administrator  SET  idadministrator = @idadministrator,  category = @category WHERE  idadministrator  = @idadministrator;";
-            BindParams(cmd);
-            BindId(cmd);
+            string sql_text="UPDATE administrator  SET  idadministrator="+new_id+", category = '"+new_catgory+"' WHERE idadministrator  ="+actual_id;
+            cmd.CommandText=sql_text;
+            //cmd.CommandText = @"UPDATE  administrator  SET  idadministrator = @idadministrator,  category = @category WHERE  idadministrator  = @idadministrator;";
+            //BindParams(cmd);
+            //BindId(cmd);
             
             await cmd.ExecuteNonQueryAsync();
         }

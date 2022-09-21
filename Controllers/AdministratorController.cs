@@ -67,7 +67,7 @@ namespace university.Controllers
                 return new NotFoundResult();
             result.idadministrator = body.idadministrator;
             result.category = body.category;
-            await result.UpdateAsync();
+            await result.UpdateAsync(id, body.idadministrator, body.category);
             return new OkObjectResult(result);
         }
 
