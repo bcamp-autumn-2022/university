@@ -20,7 +20,6 @@ namespace university.Controllers
             await Db.Connection.OpenAsync();
             var query = new User(Db);
             var result = await query.GetAllAsync();
-            Console.WriteLine("Test");
             return new OkObjectResult(result);
         }
 
@@ -31,7 +30,6 @@ namespace university.Controllers
             await Db.Connection.OpenAsync();
             var query = new User(Db);
             var result = await query.FindOneAsync(id);
-            Console.WriteLine(result);
             if (result is null)
                 return new NotFoundResult();
             return new OkObjectResult(result);
