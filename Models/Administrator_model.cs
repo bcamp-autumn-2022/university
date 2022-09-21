@@ -12,7 +12,7 @@ namespace university
         public string category { get; set; }
 
         internal Database Db { get; set; }
-
+        public int old_id;
         public Administrator()
         {
         }
@@ -95,10 +95,9 @@ namespace university
 
         public async Task UpdateAsync(int actual_id)
         {
+            old_id = actual_id;
             using var cmd = Db.Connection.CreateCommand();
-            //string sql_text = "UPDATE administrator  SET  idadministrator=" + new_id + ", category = '" + new_category + "' WHERE idadministrator  =" + actual_id;
-            //cmd.CommandText = sql_text;
-            cmd.CommandText = @"UPDATE  administrator  SET  idadministrator = @idadministrator,  category = @category WHERE  idadministrator  ="+actual_id;
+            cmd.CommandText = @"UPDATE  administrator  SET  idadministrator = @idadministrator,  category = @category WHERE  idadministrator  =@old_id";
             BindParams(cmd);
             BindId(cmd);
 
@@ -148,6 +147,13 @@ namespace university
                 ParameterName = "@category",
                 DbType = DbType.String,
                 Value = category,
+            });
+
+            cmd.Parameters.Add(new MySqlParameter
+            {
+                ParameterName = "@old_id",
+                DbType = DbType.Int32,
+                Value = old_id,
             });
         }
     }
