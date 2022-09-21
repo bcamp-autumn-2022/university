@@ -40,7 +40,7 @@ namespace university.Controllers
             await Db.Connection.OpenAsync();
             body.Db = Db;
             int result=await body.InsertAsync();
-            Console.WriteLine("inserted id="+result);
+            Console.WriteLine(body.date);
             return new OkObjectResult(result);
         }
 
