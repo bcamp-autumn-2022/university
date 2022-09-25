@@ -72,7 +72,6 @@ namespace university.Controllers
             {
                 return new OkObjectResult(updateTest);
             }
-
         }
 
         // DELETE api/User/5
