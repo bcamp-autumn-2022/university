@@ -10,7 +10,7 @@ namespace university
         public Database(string connectionString)
         {
             //Connection = new MySqlConnection(connectionString);
-            Connection = new MySqlConnection(Environment.GetEnvironmentVariable("$JAWSDB_URL"));
+            Connection = new MySqlConnection(Environment.GetEnvironmentVariable("$DATABASE_URL"));
         }
 
         public void Dispose() => Connection.Dispose();
