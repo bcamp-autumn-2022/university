@@ -85,13 +85,14 @@ namespace university
             } 
         }
 
-        public async Task UpdateAsync()
+        public async Task<int> UpdateAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"UPDATE  user  SET  username  = @username,  password  = @password, identity = @identity, firstname=@firstname, lastname=@lastname WHERE  iduser  = @iduser;";
             BindParams(cmd);
             BindId(cmd);
-            await cmd.ExecuteNonQueryAsync();
+            int returnValue=await cmd.ExecuteNonQueryAsync();
+            return returnValue;
         }
 
         public async Task DeleteAsync()
