@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
-using MySqlConnector;
+using Npgsql;
 
 namespace university
 {
     public class Student
     {
         public int idstudent { get; set; }
-        public DateTime start_date { get; set; }
-        public DateTime graduate_date { get; set; }
+        public DateTime? start_date { get; set; }
+        public DateTime? graduate_date { get; set; }
 
         internal Database Db { get; set; }
 
@@ -36,7 +36,7 @@ namespace university
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"SELECT * FROM  student  WHERE  idstudent  = @idstudent";
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@idstudent",
                 DbType = DbType.Int32,
@@ -109,33 +109,39 @@ namespace university
                     var post = new Student(Db)
                     {
                         idstudent = reader.GetInt32(0),
-                        start_date = reader.GetDateTime(1),
-                        graduate_date = reader.GetDateTime(2)
+                        start_date = null,
+                        graduate_date = null
                     };
+                    if (!reader.IsDBNull(1))
+                        post.start_date = reader.GetDateTime(1);
+
+                    if (!reader.IsDBNull(2))
+                        post.graduate_date = reader.GetDateTime(2);
+
                     posts.Add(post);
                 }
             }
             return posts;
         }
 
-         private void BindId(MySqlCommand cmd)
+         private void BindId(NpgsqlCommand cmd)
         {
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@idstudent",
                 DbType = DbType.String,
                 Value = idstudent,
             });
         }
-        private void BindParams(MySqlCommand cmd)
+        private void BindParams(NpgsqlCommand cmd)
         {
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@start_date",
                 DbType = DbType.DateTime,
                 Value = start_date,
             });
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@graduate_date",
                 DbType = DbType.DateTime,

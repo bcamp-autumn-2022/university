@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
-using MySqlConnector;
+using Npgsql;
 
 namespace university
 {
@@ -27,7 +27,7 @@ namespace university
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"SELECT  password   FROM  user  WHERE  username  = @username";
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@username",
                 DbType = DbType.String,

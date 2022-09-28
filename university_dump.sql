@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `university` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `university`;
--- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
+-- Npgsql dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: university
 -- ------------------------------------------------------

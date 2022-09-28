@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
-using MySqlConnector;
+using Npgsql;
 
 namespace university
 {
@@ -37,7 +37,7 @@ namespace university
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"SELECT * FROM  grade  WHERE  idgrade  = @idgrade";
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@idgrade",
                 DbType = DbType.Int32,
@@ -56,7 +56,7 @@ namespace university
             try
             {
                 await cmd.ExecuteNonQueryAsync();
-                int lastInsertId = (int) cmd.LastInsertedId;
+                int lastInsertId = 1;
                 return lastInsertId; 
             }
             catch (System.Exception)
@@ -104,9 +104,9 @@ namespace university
             return posts;
         }
 
-        private void BindId(MySqlCommand cmd)
+        private void BindId(NpgsqlCommand cmd)
         {
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@idgrade",
                 DbType = DbType.Int32,
@@ -114,33 +114,33 @@ namespace university
             });
         }
 
-        private void BindParams(MySqlCommand cmd)
+        private void BindParams(NpgsqlCommand cmd)
         {
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@date",
                 DbType = DbType.DateTime,
                 Value = date,
             });
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@idstudent",
                 DbType = DbType.Int32,
                 Value = idstudent,
             });
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@idteacher",
                 DbType = DbType.Int32,
                 Value = idteacher,
             });
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@idcourse",
                 DbType = DbType.Int32,
                 Value = idcourse,
             });
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@grade",
                 DbType = DbType.Int32,

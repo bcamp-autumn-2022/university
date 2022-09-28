@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
-using MySqlConnector;
+using Npgsql;
 
 namespace university
 {
@@ -39,7 +39,7 @@ namespace university
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"SELECT * FROM  User  WHERE  iduser  = @iduser";
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@iduser",
                 DbType = DbType.Int32,
@@ -76,7 +76,7 @@ namespace university
             try
             {
                 await cmd.ExecuteNonQueryAsync();
-                int lastInsertId = (int) cmd.LastInsertedId; 
+                int lastInsertId = 1; 
                 return lastInsertId;
             }
             catch (System.Exception)
@@ -125,9 +125,9 @@ namespace university
             return posts;
         }
         
-        private void BindId(MySqlCommand cmd)
+        private void BindId(NpgsqlCommand cmd)
         {
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@iduser",
                 DbType = DbType.Int32,
@@ -135,33 +135,33 @@ namespace university
             });
         }
 
-        private void BindParams(MySqlCommand cmd)
+        private void BindParams(NpgsqlCommand cmd)
         {
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@username",
                 DbType = DbType.String,
                 Value = username,
             });
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@password",
                 DbType = DbType.String,
                 Value = password,
             });
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@identity",
                 DbType = DbType.Int32,
                 Value = identity,
             });
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@firstname",
                 DbType = DbType.String,
                 Value = firstname,
             });
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@lastname",
                 DbType = DbType.String,

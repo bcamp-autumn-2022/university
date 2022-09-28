@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
-using MySqlConnector;
+using Npgsql;
 
 namespace university
 {
@@ -32,7 +32,7 @@ namespace university
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"SELECT * FROM  teacher  WHERE  idteacher  = @idteacher";
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@idteacher",
                 DbType = DbType.Int32,
@@ -94,9 +94,9 @@ namespace university
             return posts;
         }
 
-        private void BindId(MySqlCommand cmd)
+        private void BindId(NpgsqlCommand cmd)
         {
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@idteacher",
                 DbType = DbType.Int32,
@@ -104,9 +104,9 @@ namespace university
             });
         }
 
-        private void BindParams(MySqlCommand cmd)
+        private void BindParams(NpgsqlCommand cmd)
         {
-            cmd.Parameters.Add(new MySqlParameter
+            cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@iddepartment",
                 DbType = DbType.Int16,

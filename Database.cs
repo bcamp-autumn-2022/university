@@ -1,15 +1,15 @@
 using System;
-using MySqlConnector;
+using Npgsql;
 
 namespace university
 {
     public class Database : IDisposable
     {
-        public MySqlConnection Connection { get; }
+        public NpgsqlConnection Connection { get; }
 
         public Database(string connectionString)
         {
-            Connection = new MySqlConnection(connectionString);
+            Connection = new NpgsqlConnection(connectionString);
         }
 
         public void Dispose() => Connection.Dispose();
