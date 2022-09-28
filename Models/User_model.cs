@@ -29,7 +29,7 @@ namespace university
         public async Task<List<User>> GetAllAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT * FROM  user ;";
+            cmd.CommandText = @"SELECT * FROM  user_table ;";
             var result=await ReturnAllAsync(await cmd.ExecuteReaderAsync());
            // Console.WriteLine(result);
             return await ReturnAllAsync(await cmd.ExecuteReaderAsync());
@@ -38,7 +38,7 @@ namespace university
         public async Task<User> FindOneAsync(int iduser)
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT * FROM  User  WHERE  iduser  = @iduser";
+            cmd.CommandText = @"SELECT * FROM  user_table  WHERE  iduser  = @iduser";
             cmd.Parameters.Add(new NpgsqlParameter
             {
                 ParameterName = "@iduser",
@@ -61,7 +61,7 @@ namespace university
         {
             using var txn = await Db.Connection.BeginTransactionAsync();
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"DELETE FROM  user ";
+            cmd.CommandText = @"DELETE FROM  user_table ";
             await cmd.ExecuteNonQueryAsync();
             await txn.CommitAsync();
         }
@@ -70,7 +70,7 @@ namespace university
         public async Task<int> InsertAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText=@"insert into user(username,password,identity,firstname,lastname) 
+            cmd.CommandText=@"insert into user_table(username,password,identity,firstname,lastname) 
             values(@username,@password,@identity,@firstname,@lastname);";
             BindParams(cmd);
             try
@@ -88,7 +88,7 @@ namespace university
         public async Task<int> UpdateAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"UPDATE  user  SET  username  = @username,  password  = @password, identity = @identity, firstname=@firstname, lastname=@lastname WHERE  iduser  = @iduser;";
+            cmd.CommandText = @"UPDATE  user_table  SET  username  = @username,  password  = @password, identity = @identity, firstname=@firstname, lastname=@lastname WHERE  iduser  = @iduser;";
             BindParams(cmd);
             BindId(cmd);
             int returnValue=await cmd.ExecuteNonQueryAsync();
@@ -98,7 +98,7 @@ namespace university
         public async Task DeleteAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"DELETE FROM  user  WHERE  iduser  = @iduser;";
+            cmd.CommandText = @"DELETE FROM  user_table  WHERE  iduser  = @iduser;";
             BindId(cmd);
             await cmd.ExecuteNonQueryAsync();
         }
