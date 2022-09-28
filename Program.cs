@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient(_ => new Database(builder.Configuration. GetConnectionString("HEROKU_POSTGRESQL_IVORY_URL")));
+builder.Services.AddTransient(_ => new Database(System.Environment.GetEnvironmentVariable("HEROKU_POSTGRESQL_IVORY_URL")));
 
 var app = builder.Build();
 
