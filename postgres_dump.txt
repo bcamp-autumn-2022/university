@@ -1,0 +1,72 @@
+CREATE TABLE  user_table  (
+   iduser  SERIAL primary key,
+   user_tablename  varchar(45) DEFAULT NULL,
+   password  varchar(255) DEFAULT NULL,
+   identity  int DEFAULT NULL,
+   firstname  varchar(45) DEFAULT NULL,
+   lastname  varchar(45) DEFAULT NULL
+);
+
+CREATE TABLE  administrator  (
+   idadministrator  int NOT NULL,
+   category  char(2) DEFAULT NULL,
+  PRIMARY KEY ( idadministrator ),
+  CONSTRAINT  user_table_administrator  FOREIGN KEY ( idadministrator ) REFERENCES  user_table  ( iduser ) ON DELETE RESTRICT ON UPDATE CASCADE
+) ;
+
+CREATE TABLE  student  (
+   idstudent  int NOT NULL,
+   start_date  date DEFAULT NULL,
+   graduate_date  date DEFAULT NULL,
+  PRIMARY KEY ( idstudent ),
+  CONSTRAINT  user_table_student  FOREIGN KEY ( idstudent ) REFERENCES  user_table  ( iduser) ON DELETE RESTRICT ON UPDATE CASCADE
+) ;
+
+CREATE TABLE  department  (
+   iddepartment  smallint NOT NULL,
+   name  varchar(45) DEFAULT NULL,
+  PRIMARY KEY ( iddepartment )
+);
+
+CREATE TABLE  teacher  (
+   idteacher  int NOT NULL,
+   iddepartment  smallint DEFAULT NULL,
+  PRIMARY KEY ( idteacher ),
+  CONSTRAINT  department_teacher  FOREIGN KEY ( iddepartment ) REFERENCES  department  ( iddepartment ) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT  user_table_teacher  FOREIGN KEY ( idteacher ) REFERENCES  user_table  ( iduser ) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+
+CREATE TABLE  course  (
+   idcourse  int NOT NULL,
+   name  varchar(45) DEFAULT NULL,
+   greditpoints  smallint DEFAULT NULL,
+  PRIMARY KEY ( idcourse )
+) ; 
+
+CREATE TABLE  grade  (
+   idgrade  SERIAL NOT NULL,
+   date  date DEFAULT NULL,
+   idstudent  int NOT NULL,
+   idteacher  int NOT NULL,
+   idcourse  int NOT NULL,
+   grade  smallint DEFAULT NULL,
+  PRIMARY KEY ( idgrade ),
+  CONSTRAINT  cource_grade  FOREIGN KEY ( idcourse ) REFERENCES  course  ( idcourse ) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT  student_grade  FOREIGN KEY ( idstudent ) REFERENCES  student  ( idstudent ) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT  teacher_grade  FOREIGN KEY ( idteacher ) REFERENCES  teacher  ( idteacher ) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+
+INSERT INTO  user_table  VALUES (1,'user_table01','pass1',1,'Lisa','Admin1'),(2,'user_table02','pass2',2,'Bob','Student1'),(3,'user_table4','$2a$11$iN.aEBdHgVW/10i2.wD7g.ZrNTQBpmBB/zgNIwxmTdRKRGQf.77DC',3,'Ann','Teacher1'),(5,'user_table05','$2a$11$5bANriWpp9cFkxYiP93MiOttJp1Jel0AVXVzlPLzagiEVuNGzNdhi',2,'Jussi','Testi'),(9,'user_table07','$2a$11$dWh2.AIe13ymslkZRS.wc.oE8RzhKFFN/o4Szt9vqzHlCVYLykjRS',3,'Matti','Mainio'),(11,'user_table11','$2a$11$g9whdcRzW/MfG0GbBR2Bpe2/whHJeGQaQpbUP9MH3WcugmyIocVQW',3,'Matti','Mainio'),(12,'user_table12','$2a$11$5ytXT1mJd7rlbtrpCjhY3OsBNYxLW9j/8fB6KFClCh5Bb6nBCPSvO',3,'Matti','Mainio'),(13,'user_table13','$2a$11$cS04LAeeRjE/cXTElgzA7OYx1SBUiOwKfF8a6tpJOfXlFlnpFb5.i',2,'Matti','Teacherx');
+
+INSERT INTO  course  VALUES (200,'C# Basics',5),(201,'SQL Basics',3),(301,'History of Finland',5),(305,'Java',4),(310,'Java',4),(410,'Java',4),(610,'JavaScript',6);
+
+INSERT INTO  department  VALUES (100,'ict'),(101,'history');
+
+
+INSERT INTO  student  VALUES (2,'2019-01-05','2023-04-05');
+
+INSERT INTO  teacher  VALUES (3,101);
+
+INSERT INTO  grade  VALUES (1,'2022-09-20',2,3,200,4),(2,'2022-09-21',2,3,201,4),(3,'2022-09-20',2,3,201,5);
