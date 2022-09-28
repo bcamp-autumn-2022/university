@@ -9,7 +9,7 @@ namespace university
 
         public Database(string connectionString)
         {
-            Connection = new NpgsqlConnection(connectionString);
+            Connection = new NpgsqlConnection(System.Environment.GetEnvironmentVariable("HEROKU_POSTGRESQL_IVORY_URL"));
         }
 
         public void Dispose() => Connection.Dispose();
