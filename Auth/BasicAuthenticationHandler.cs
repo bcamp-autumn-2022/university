@@ -4,7 +4,6 @@ using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Security.Claims;
-using MySqlConnector;
 
 namespace university;
 public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
@@ -42,7 +41,6 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         var authUsername = authSplit[0];
         var authPassword = authSplit.Length > 1 ? authSplit[1] : throw new Exception("Unable to get password");
 
-        //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=netuser;password=netpass;port=3306;database=university;");
         
         Database db = new Database("server=127.0.0.1;user id=netuser;password=netpass;port=3306;database=university;");
 
