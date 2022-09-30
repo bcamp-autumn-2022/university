@@ -9,8 +9,8 @@ namespace university
     public class Student
     {
         public int idstudent { get; set; }
-        public DateTime start_date { get; set; }
-        public DateTime graduate_date { get; set; }
+        public DateTime? start_date { get; set; }
+        public DateTime? graduate_date { get; set; }
 
         internal Database Db { get; set; }
 

@@ -5,6 +5,7 @@ using System;
 
 namespace university.Controllers
 {
+    [BasicAuthorization]
     [Route("api/[controller]")]
     public class StudentController : ControllerBase
     {
@@ -14,6 +15,7 @@ namespace university.Controllers
         }
 
         // GET api/Student
+         
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
