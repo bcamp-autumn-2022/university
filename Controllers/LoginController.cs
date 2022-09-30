@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace university.Controllers
 {
@@ -15,14 +18,13 @@ namespace university.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]User body)
         {
-            Console.WriteLine("Login called");
             Console.WriteLine(body.username);
             Console.WriteLine(body.password);
             await Db.Connection.OpenAsync();
             var query = new Login(Db);
-            var passwordFromTheDtabase = await query.GetPassword(body.username);
+            var result = await query.GetPassword(body.username);
    
-            if (passwordFromTheDtabase is null || ! BCrypt.Net.BCrypt.Verify(body.password, passwordFromTheDtabase))
+            if (result is null || ! BCrypt.Net.BCrypt.Verify(body.password, result))
             {
                 // authentication failed
                 return new OkObjectResult(false);

@@ -42,8 +42,14 @@ namespace university
             var loginUser = new Login();
             using (reader)
             {
-                await reader.ReadAsync();
-                loginUser.password=reader.GetString(0);
+                while (await reader.ReadAsync())
+                {
+                    var user = new Login(Db)
+                    {
+                        password = reader.GetString(0)
+                    };
+                    loginUser=user;
+                }
             }
 
             return loginUser.password;
