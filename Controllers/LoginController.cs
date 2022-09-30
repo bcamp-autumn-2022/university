@@ -29,6 +29,10 @@ namespace university.Controllers
             else
             {
                 // authentication successful
+                Singleton objectSingleton = Singleton.Instance;
+                objectSingleton.Username=body.username;
+                objectSingleton.Password=body.password;
+                Console.WriteLine("set : "+objectSingleton.Username);
                 return new OkObjectResult(true);
             }
             
