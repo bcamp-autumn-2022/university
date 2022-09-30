@@ -7,7 +7,9 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System;
 using System.Security.Claims;
+using MySqlConnector;
 
+namespace university;
 public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     public BasicAuthenticationHandler(
@@ -19,41 +21,55 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
 : base(options, logger, encoder, clock)
     {
     }
- 
+
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         Response.Headers.Add("WWW-Authenticate", "Basic");
- 
+
         if (!Request.Headers.ContainsKey("Authorization"))
         {
             return Task.FromResult(AuthenticateResult.Fail("Authorization header missing."));
         }
- 
+
         // Get authorization key
         var authorizationHeader = Request.Headers["Authorization"].ToString();
         var authHeaderRegex = new Regex(@"Basic (.*)");
- 
+
         if (!authHeaderRegex.IsMatch(authorizationHeader))
         {
             return Task.FromResult(AuthenticateResult.Fail("Authorization code not formatted properly."));
         }
- 
+
         var authBase64 = Encoding.UTF8.GetString(Convert.FromBase64String(authHeaderRegex.Replace(authorizationHeader, "$1")));
         var authSplit = authBase64.Split(Convert.ToChar(":"), 2);
         var authUsername = authSplit[0];
         var authPassword = authSplit.Length > 1 ? authSplit[1] : throw new Exception("Unable to get password");
-        Singleton objectSingleton=Singleton.Instance;
-  
-        if (authUsername != objectSingleton.Username || authPassword != objectSingleton.Password)
+
+        MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=netuser;password=netpass;port=3306;database=university;");
+        
+        Database db = new Database("server=127.0.0.1;user id=netuser;password=netpass;port=3306;database=university;");
+
+        Login login = new Login(db);
+        db.Connection.Open();
+        var passwordFromDatabase = login.GetPassword(authUsername).Result;
+        //Console.WriteLine(passwordFromDatabase);
+
+        if (passwordFromDatabase != null && BCrypt.Net.BCrypt.Verify(authPassword, passwordFromDatabase))
         {
-            Console.WriteLine("WRONG : "+objectSingleton.Username);
-            return Task.FromResult(AuthenticateResult.Fail("The username or password is not correct."));
+            Console.WriteLine("RIGHT : ");;
+            var authenticatedUser = new AuthenticatedUser("BasicAuthentication", true, authUsername);
+            var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(authenticatedUser));
+            return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(claimsPrincipal, Scheme.Name)));
+
         }
+        else
+        {
+            Console.WriteLine("WRONG : ");
+            return Task.FromResult(AuthenticateResult.Fail("The username or password is not correct."));
+           
+        }
+
  
-        Console.WriteLine("RIGHT : "+objectSingleton.Username);
-        var authenticatedUser = new AuthenticatedUser("BasicAuthentication", true, "admin");
-        var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(authenticatedUser));
- 
-        return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(claimsPrincipal, Scheme.Name)));
+        
     }
 }
