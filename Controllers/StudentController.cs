@@ -22,7 +22,6 @@ namespace university.Controllers
             await Db.Connection.OpenAsync();
             var query = new Student(Db);
             var result = await query.GetAllAsync();
-            Console.WriteLine("Test");
             return new OkObjectResult(result);
         }
 
