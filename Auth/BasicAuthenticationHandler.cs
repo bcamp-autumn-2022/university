@@ -1,11 +1,8 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Logging;
 using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using System.Text;
-using System;
 using System.Security.Claims;
 using MySqlConnector;
 
@@ -45,8 +42,8 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         var authUsername = authSplit[0];
         var authPassword = authSplit.Length > 1 ? authSplit[1] : throw new Exception("Unable to get password");
 
-        MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=netuser;password=netpass;port=3306;database=university;");
-        
+       // MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=netuser;password=netpass;port=3306;database=university;");
+
         Database db = new Database("server=127.0.0.1;user id=netuser;password=netpass;port=3306;database=university;");
 
         Login login = new Login(db);
@@ -56,7 +53,7 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
 
         if (passwordFromDatabase != null && BCrypt.Net.BCrypt.Verify(authPassword, passwordFromDatabase))
         {
-            Console.WriteLine("RIGHT : ");;
+            Console.WriteLine("RIGHT : "); ;
             var authenticatedUser = new AuthenticatedUser("BasicAuthentication", true, authUsername);
             var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(authenticatedUser));
             return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(claimsPrincipal, Scheme.Name)));
@@ -66,10 +63,8 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         {
             Console.WriteLine("WRONG : ");
             return Task.FromResult(AuthenticateResult.Fail("The username or password is not correct."));
-           
+
         }
 
- 
-        
     }
 }

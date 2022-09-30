@@ -15,6 +15,7 @@ namespace university.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]User body)
         {
+            Console.WriteLine("Login called");
             Console.WriteLine(body.username);
             Console.WriteLine(body.password);
             await Db.Connection.OpenAsync();
