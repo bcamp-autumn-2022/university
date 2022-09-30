@@ -1,4 +1,3 @@
-// BasicAuthenticationHandler.cs
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
@@ -43,12 +42,15 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         var authSplit = authBase64.Split(Convert.ToChar(":"), 2);
         var authUsername = authSplit[0];
         var authPassword = authSplit.Length > 1 ? authSplit[1] : throw new Exception("Unable to get password");
- 
-        if (authUsername != "admin" || authPassword != "1234")
+        Singleton objectSingleton=Singleton.Instance;
+  
+        if (authUsername != objectSingleton.Username || authPassword != objectSingleton.Password)
         {
+            Console.WriteLine("WRONG : "+objectSingleton.Username);
             return Task.FromResult(AuthenticateResult.Fail("The username or password is not correct."));
         }
  
+        Console.WriteLine("RIGHT : "+objectSingleton.Username);
         var authenticatedUser = new AuthenticatedUser("BasicAuthentication", true, "admin");
         var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(authenticatedUser));
  
