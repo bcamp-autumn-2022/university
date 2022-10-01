@@ -22,7 +22,7 @@ namespace university.Controllers
         }
 
         [HttpGet("student/{id}")]
-        public async Task<IActionResult> GetOneStudentData()
+        public async Task<IActionResult> GetOneStudentData(int id)
         {
             await Db.Connection.OpenAsync();
             var query = new Common(Db);
