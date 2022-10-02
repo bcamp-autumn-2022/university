@@ -9,3 +9,7 @@ The data is hard coded to the model, in order to make the application simple.
 <img src="er_model.png">
 
 <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">instructions for writing README file</a>
+
+## Database connection
+
+For development (local machine) I created environment variable called "DATABASE_URL" in Program.cs. And in Database.cs I use that variable. So in production environment (example Heroku), I set enviroment variable which is configured for the Heroku MySQL.
