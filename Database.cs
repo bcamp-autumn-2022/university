@@ -9,7 +9,7 @@ namespace university
 
         public Database(string connectionString)
         {
-            Connection = new MySqlConnection(connectionString);
+            Connection = new MySqlConnection(System.Environment.GetEnvironmentVariable("DATABASE_URL"));
         }
 
         public void Dispose() => Connection.Dispose();

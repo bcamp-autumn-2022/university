@@ -34,8 +34,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 } 
-    app.UseSwagger();
-    app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
@@ -43,19 +41,17 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseCors(builder =>
+//setting the connection string for development environment
+if (app.Environment.IsDevelopment()){
+app.Use(async (contex, next)=>
 {
-    builder.AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader();
-});
+    System.Environment.SetEnvironmentVariable("DATABASE_URL", "server=127.0.0.1;user id=netuser;password=netpass;port=3306;database=university;");
 
-//example about MiddleWare function
-/* app.Use(async (contex, next)=>
-{
-    Console.WriteLine("Middleware excuted");
+    //Console.WriteLine(System.Environment.GetEnvironmentVariable("DATABASE_URL"));
     await next();
 }
-); */
+);
+}
+
 
 app.Run();
