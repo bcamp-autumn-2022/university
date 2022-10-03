@@ -9,7 +9,7 @@ namespace university
     public class Administrator
     {
         public int idadministrator { get; set; }
-        public string category { get; set; }
+        public string? category { get; set; }
 
         internal Database Db { get; set; }
 

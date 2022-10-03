@@ -58,9 +58,17 @@ namespace university.Controllers
         {
             Console.WriteLine("update called");
             await Db.Connection.OpenAsync();
+            Console.WriteLine(body);
             var query = new User(Db);
             body.password = BCrypt.Net.BCrypt.HashPassword(body.password);
+    
             var result = await query.FindOneAsync(id);
+            result.firstname=body.firstname;
+            result.lastname=body.lastname;
+            result.username=body.username;
+            result.password=body.password;
+            result.identity=body.identity;
+
             if (result is null)
                 return new NotFoundResult();
             int updateTest = await result.UpdateAsync();

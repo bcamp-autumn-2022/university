@@ -49,13 +49,12 @@ app.UseAuthorization();
 app.MapControllers();
 
 //setting the connection string for development environment
+
 if (app.Environment.IsDevelopment()){
 app.Use(async (contex, next)=>
 {
-    System.Environment.SetEnvironmentVariable("DATABASE_URL", "server=127.0.0.1;user id=netuser;password=netpass;port=3306;database=university;");
-
-    //Console.WriteLine(System.Environment.GetEnvironmentVariable("DATABASE_URL"));
-    await next();
+     MyEnvironment.SetMySQLConnention();
+     await next();
 }
 );
 }
