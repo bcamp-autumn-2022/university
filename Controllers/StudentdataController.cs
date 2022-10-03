@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace university.Controllers
 {
+     [BasicAuthorization]
     [Route("api/[controller]")]
     public class StudentdataController : ControllerBase
     {
@@ -21,12 +22,12 @@ namespace university.Controllers
             return new OkObjectResult(result);
         }
 
-        [HttpGet("student/{id}")]
-        public async Task<IActionResult> GetOneStudentData(int id)
+        [HttpGet("student/{username}")]
+        public async Task<IActionResult> GetOneStudentData(string username)
         {
             await Db.Connection.OpenAsync();
             var query = new Studentdata(Db);
-            var result = await query.GetOneStudentAsync(id);
+            var result = await query.GetOneStudentAsync(username);
             return new OkObjectResult(result);
         }    
 

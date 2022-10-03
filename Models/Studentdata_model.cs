@@ -35,18 +35,18 @@ namespace university
             return await ReturnStudentsAsync(await cmd.ExecuteReaderAsync());
         }
 
-         public async Task<Studentdata> GetOneStudentAsync(int idstudent)
+         public async Task<Studentdata> GetOneStudentAsync(string username)
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"select firstname, lastname,username,
             date_format(start_date,'%d.%m.%Y') as 'start_date', 
             date_format(graduate_date,'%d.%m.%Y') as 'graduate_date' 
-            from student inner join user on idstudent=iduser where idstudent=@idstudent;";
+            from student inner join user on idstudent=iduser where username=@username;";
             cmd.Parameters.Add(new MySqlParameter
             {
-                ParameterName = "@idstudent",
-                DbType = DbType.Int32,
-                Value = idstudent,
+                ParameterName = "@username",
+                DbType = DbType.String,
+                Value = username,
             });
             var result = await ReturnStudentsAsync(await cmd.ExecuteReaderAsync());
             return result.Count > 0 ? result[0] : null;

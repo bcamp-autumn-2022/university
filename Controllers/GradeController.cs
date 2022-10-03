@@ -40,7 +40,11 @@ namespace university.Controllers
             await Db.Connection.OpenAsync();
             body.Db = Db;
             int result=await body.InsertAsync();
-            Console.WriteLine(body.date);
+            if (result == 0)                                                   //Tämä if puuttuu
+            {
+                return new ConflictObjectResult(0);
+            }
+            Console.WriteLine(result);
             return new OkObjectResult(result);
         }
 
