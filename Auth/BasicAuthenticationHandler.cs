@@ -42,7 +42,7 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         var authPassword = authSplit.Length > 1 ? authSplit[1] : throw new Exception("Unable to get password");
 
         
-        Database db = new Database("server=127.0.0.1;user id=netuser;password=netpass;port=3306;database=university;");
+        Database db = new Database(System.Environment.GetEnvironmentVariable("DATABASE_URL"));
 
         Login login = new Login(db);
         db.Connection.Open();
