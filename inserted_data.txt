@@ -1,0 +1,50 @@
+USERS
+student01 pass01
+student02 pass02
+student03 pass03
+
+teacher01 pass01
+teacher02
+teacher03
+
+admin01
+admin02
+admin03
+
+DEPARTMENTS
+ICT =101
+History=201
+Biology=301
+
+COURSES
+11=Java 8
+12=C#
+13=C++
+14=History of Finland
+
+
+STUDENTS
+18
+19
+20
+
+
+TEACHERS
+21
+22
+23
+
+ADMINS
+24
+25
+26
+
+
+GRADES
+idstudent=18, idteacher=21, idcourse=11, grade=5
+idstudent=18, idteacher=22, idcourse=12, grade=3
+idstudent=18, idteacher=23, idcourse=13, grade=4
+
+idstudent=19, idteacher=21, idcourse=12, grade=5
+idstudent=19, idteacher=22, idcourse=13, grade=3
+idstudent=19, idteacher=23, idcourse=14, grade=4
