@@ -13,7 +13,7 @@ namespace university
         public string? Username { get; set; }
         public string? Department { get; set; }
 
-        internal Database Db { get; set; }
+        internal Database? Db { get; set; }
         public Teacherdata()
         {
         }

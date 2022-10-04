@@ -15,7 +15,7 @@ namespace university
         public string? Start_date { get; set; }
         public string? Graduate_date { get; set; }
 
-        internal Database Db { get; set; }
+        internal Database? Db { get; set; }
         public Studentdata()
         {
         }

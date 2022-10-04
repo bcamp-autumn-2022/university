@@ -14,7 +14,7 @@ namespace university
         public string? Department { get; set; }
         public string? Course { get; set; }
 
-        internal Database Db { get; set; }
+        internal Database? Db { get; set; }
         public Teachercourse()
         {
         }

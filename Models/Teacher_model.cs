@@ -10,7 +10,7 @@ namespace university
     {
         public int? idteacher { get; set; }
         public int? iddepartment { get; set; }
-        internal Database Db { get; set; }
+        internal Database? Db { get; set; }
 
         public Teacher()
         {

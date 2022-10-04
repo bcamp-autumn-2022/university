@@ -11,7 +11,7 @@ namespace university
         public int? idcourse { get; set; }
         public string? name { get; set; }
         public Int16? greditpoints { get; set; }
-        internal Database Db { get; set; }
+        internal Database? Db { get; set; }
 
         public Course()
         {

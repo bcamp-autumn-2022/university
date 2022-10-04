@@ -15,7 +15,7 @@ namespace university
         public string? firstname { get; set; }
         public string? lastname { get; set; }
 
-        internal Database Db { get; set; }
+        internal Database? Db { get; set; }
 
         public User()
         {

@@ -12,7 +12,7 @@ namespace university
         public DateTime? start_date { get; set; }
         public DateTime? graduate_date { get; set; }
 
-        internal Database Db { get; set; }
+        internal Database? Db { get; set; }
 
         public Student()
         {

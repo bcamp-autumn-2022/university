@@ -17,7 +17,7 @@ namespace university
         public string? Gradedate { get; set; }
         public string? Teacher { get; set; }
         //database
-        internal Database Db { get; set; }
+        internal Database? Db { get; set; }
 
         public Studentgrade()
         {

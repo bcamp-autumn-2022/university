@@ -11,7 +11,7 @@ namespace university
         public string? username { get; set; }
         public string? password { get; set; }
 
-        internal Database Db { get; set; }
+        internal Database? Db { get; set; }
 
         public Login()
         {

@@ -8,10 +8,10 @@ namespace university
 {
     public class Administrator
     {
-        public Int16? idadministrator { get; set; }
+        public Int32? idadministrator { get; set; }
         public string? category { get; set; }
 
-        internal Database Db { get; set; }
+        internal Database? Db { get; set; }
 
         public Administrator()
         {
@@ -74,8 +74,8 @@ namespace university
             Console.WriteLine(cmd.CommandText); //Debug
             try
             {
-                await cmd.ExecuteNonQueryAsync(); 
-                return @idadministrator;
+                int affected=await cmd.ExecuteNonQueryAsync();
+                return affected; 
             }
             catch (MySqlException ex) {
                 Console.WriteLine("Inner Exception: " + ex.Message);
@@ -131,7 +131,7 @@ namespace university
             cmd.Parameters.Add(new MySqlParameter
             {
                 ParameterName = "@idadministrator",
-                DbType = DbType.Int16,
+                DbType = DbType.Int32,
                 Value = idadministrator,
             });
         }
