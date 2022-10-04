@@ -40,12 +40,12 @@ namespace university.Controllers
             var result = await query.GetStudentGrades();
             return new OkObjectResult(result);
         } 
-        [HttpGet("grade/{id}")]
-        public async Task<IActionResult> GetOneStudentGrades(int id)
+        [HttpGet("grade/{username}")]
+        public async Task<IActionResult> GetOneStudentGrades(string username)
         {
             await Db.Connection.OpenAsync();
             var query = new Studentgrade(Db);
-            var result = await query.GetOneStudentGrades(id);
+            var result = await query.GetOneStudentGrades(username);
             return new OkObjectResult(result);
         }   
         public Database Db { get; }
