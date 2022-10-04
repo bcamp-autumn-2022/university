@@ -8,8 +8,8 @@ namespace university
 {
     public class Teacher
     {
-        public int? idteacher { get; set; }
-        public int? iddepartment { get; set; }
+        public Int32? idteacher { get; set; }
+        public Int32? iddepartment { get; set; }
         internal Database? Db { get; set; }
 
         public Teacher()
@@ -86,7 +86,7 @@ namespace university
                     var post = new Teacher(Db)
                     {
                         idteacher = reader.GetInt32(0),
-                        iddepartment = reader.GetInt16(1)
+                        iddepartment = reader.GetInt32(1)
                     };
                     posts.Add(post);
                 }
@@ -109,7 +109,7 @@ namespace university
             cmd.Parameters.Add(new MySqlParameter
             {
                 ParameterName = "@iddepartment",
-                DbType = DbType.Int16,
+                DbType = DbType.Int32,
                 Value = iddepartment,
             });
         }
