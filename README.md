@@ -17,3 +17,11 @@ For development (local machine) I created environment variable called "DATABASE_
 ## JOIN Queries
 
 I made a couple of examples about INNER JOIN queries. The controller is named **StudentdataController.cs** and the queries are in models: **Studendata_model.cs** and **Studentgrade_model.cs**. And note that I manipulate the dates with the **DATE_FORMAT** function in MySQL and then I have to use **string** type for that property in the model.
+
+## Authentication
+
+In the file BasicAuthentication I have this line
+
+Database db = new Database(System.Environment.GetEnvironmentVariable("DATABASE_URL"));
+
+It has a problem: after reboot, we have to call first login and then we can call protected route. But that is the way the application will be used any way. 
