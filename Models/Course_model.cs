@@ -8,9 +8,9 @@ namespace university
 {
     public class Course
     {
-        public int idcourse { get; set; }
-        public string name { get; set; }
-        public Int16 greditpoints { get; set; }
+        public int? idcourse { get; set; }
+        public string? name { get; set; }
+        public Int16? greditpoints { get; set; }
         internal Database Db { get; set; }
 
         public Course()

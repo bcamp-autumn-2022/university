@@ -8,7 +8,7 @@ namespace university
 {
     public class Administrator
     {
-        public int idadministrator { get; set; }
+        public Int16? idadministrator { get; set; }
         public string? category { get; set; }
 
         internal Database Db { get; set; }
@@ -131,7 +131,7 @@ namespace university
             cmd.Parameters.Add(new MySqlParameter
             {
                 ParameterName = "@idadministrator",
-                DbType = DbType.Int32,
+                DbType = DbType.Int16,
                 Value = idadministrator,
             });
         }

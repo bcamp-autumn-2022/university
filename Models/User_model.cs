@@ -8,12 +8,12 @@ namespace university
 {
     public class User
     {
-        public int iduser { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public int identity { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
+        public int? iduser { get; set; }
+        public string? username { get; set; }
+        public string? password { get; set; }
+        public int? identity { get; set; }
+        public string? firstname { get; set; }
+        public string? lastname { get; set; }
 
         internal Database Db { get; set; }
 

@@ -10,7 +10,7 @@ namespace university
     {
         //Teacher properties
         public string? Teachername { get; set; }
-        public string Username { get; set; }
+        public string? Username { get; set; }
         public string? Department { get; set; }
         public string? Course { get; set; }
 

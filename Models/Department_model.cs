@@ -8,8 +8,8 @@ namespace university
 {
     public class Department
     {
-        public int iddepartment { get; set; }
-        public string name { get; set; }
+        public int? iddepartment { get; set; }
+        public string? name { get; set; }
 
         internal Database Db { get; set; }
 

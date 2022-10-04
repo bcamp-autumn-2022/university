@@ -8,12 +8,12 @@ namespace university
 {
     public class Grade
     {
-        public int idgrade { get; set; }
-        public DateTime date { get; set; }
-        public int idstudent { get; set; }
-        public int idteacher { get; set; }
-        public int idcourse { get; set; }
-        public int grade { get; set; }
+        public int? idgrade { get; set; }
+        public DateTime? date { get; set; }
+        public int? idstudent { get; set; }
+        public int? idteacher { get; set; }
+        public int? idcourse { get; set; }
+        public int? grade { get; set; }
 
         internal Database Db { get; set; }
 
