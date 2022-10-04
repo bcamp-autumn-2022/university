@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using university;
 
 namespace university.Controllers
 {
@@ -33,6 +34,9 @@ namespace university.Controllers
             {
                 // authentication successful
                 return new OkObjectResult(true);
+                Singleton singObject=Singleton.Instance;
+                singObject.Username=body.username;
+                singObject.Password=body.password;
             }
             
         }

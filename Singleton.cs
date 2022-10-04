@@ -1,5 +1,6 @@
 using System;
 
+namespace university{
 public class Singleton
 {
     public string? Username { get; set; }
@@ -19,4 +20,5 @@ public class Singleton
          return instance;
       }
    }
+}
 }

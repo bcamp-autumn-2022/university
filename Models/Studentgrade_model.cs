@@ -34,10 +34,10 @@ namespace university
             cmd.CommandText = @"select name as 'course name',grade,greditpoints,date_format(date,'%d.%m.%Y') as 'date', concat(firstname,' ', lastname) as 'teacher' from course inner join grade on course.idcourse=grade.idcourse
                 inner join teacher on teacher.idteacher=grade.idteacher inner join user on iduser=teacher.idteacher ;";
 
-            var result = await ReturnGradesAsync(await cmd.ExecuteReaderAsync());
+            //var result = await ReturnGradesAsync(await cmd.ExecuteReaderAsync());
             return await ReturnGradesAsync(await cmd.ExecuteReaderAsync());
         }
-        public async Task<Studentgrade> GetOneStudentGrades(string username)
+        public async Task<List<Studentgrade>> GetOneStudentGrades(string username)
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"select name as 'course name',grade,greditpoints,
@@ -54,8 +54,8 @@ namespace university
                 DbType = DbType.String,
                 Value = username,
             });
-            var result = await ReturnGradesAsync(await cmd.ExecuteReaderAsync());
-            return result.Count > 0 ? result[0] : null;
+            //var result = await ReturnGradesAsync(await cmd.ExecuteReaderAsync());
+                return await ReturnGradesAsync(await cmd.ExecuteReaderAsync());
         } 
         
 
