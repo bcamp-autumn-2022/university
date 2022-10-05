@@ -8,10 +8,10 @@ namespace university
 {
     public class User
     {
-        public int? iduser { get; set; }
-        public string? username { get; set; }
-        public string? password { get; set; }
-        public int? identity { get; set; }
+        public int iduser { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public int identity { get; set; }
         public string? firstname { get; set; }
         public string? lastname { get; set; }
 
@@ -30,8 +30,8 @@ namespace university
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"SELECT * FROM  user ;";
-            var result=await ReturnAllAsync(await cmd.ExecuteReaderAsync());
-           // Console.WriteLine(result);
+            var result = await ReturnAllAsync(await cmd.ExecuteReaderAsync());
+            // Console.WriteLine(result);
             return await ReturnAllAsync(await cmd.ExecuteReaderAsync());
         }
 
@@ -47,10 +47,12 @@ namespace university
             });
             var result = await ReturnAllAsync(await cmd.ExecuteReaderAsync());
             //Console.WriteLine(result.Count);
-            if(result.Count > 0){
+            if (result.Count > 0)
+            {
                 return result[0];
             }
-            else {
+            else
+            {
                 return null;
             }
             //return result.Count > 0 ? result[0] : null;
@@ -65,35 +67,35 @@ namespace university
             await cmd.ExecuteNonQueryAsync();
             await txn.CommitAsync();
         }
-    
+
 
         public async Task<int> InsertAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText=@"insert into user(username,password,identity,firstname,lastname) 
+            cmd.CommandText = @"insert into user(username,password,identity,firstname,lastname) 
             values(@username,@password,@identity,@firstname,@lastname);";
             BindParams(cmd);
             try
             {
                 await cmd.ExecuteNonQueryAsync();
-                int lastInsertId = (int) cmd.LastInsertedId; 
+                int lastInsertId = (int)cmd.LastInsertedId;
                 return lastInsertId;
             }
             catch (System.Exception)
-            {   
+            {
                 return 0;
-            } 
+            }
         }
 
         public async Task<int> UpdateAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            
+
             cmd.CommandText = @"UPDATE  user  SET  username  = @username,  password  = @password, identity = @identity, firstname=@firstname, lastname=@lastname WHERE  iduser  = @iduser;";
             BindParams(cmd);
             BindId(cmd);
-            Console.WriteLine("id="+iduser);
-            int returnValue=await cmd.ExecuteNonQueryAsync();
+            Console.WriteLine("id=" + iduser);
+            int returnValue = await cmd.ExecuteNonQueryAsync();
             return returnValue;
         }
 
@@ -118,15 +120,20 @@ namespace university
                         username = reader.GetString(1),
                         password = reader.GetString(2),
                         identity = reader.GetInt32(3),
-                        firstname = reader.GetString(4),
-                        lastname = reader.GetString(5)
+                        firstname = null,
+                        lastname = null
                     };
+                    if (!reader.IsDBNull(4))
+                        post.firstname = reader.GetString(4);
+
+                    if (!reader.IsDBNull(5))
+                        post.lastname = reader.GetString(5);
                     posts.Add(post);
                 }
             }
             return posts;
         }
-        
+
         private void BindId(MySqlCommand cmd)
         {
             cmd.Parameters.Add(new MySqlParameter
