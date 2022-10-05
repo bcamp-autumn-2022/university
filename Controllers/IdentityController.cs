@@ -16,10 +16,11 @@ namespace university.Controllers
         {
             await Db.Connection.OpenAsync();
             var query = new Identity(Db);
-            string result = await query.GetUserIdentity(username);
+            string result="0";
+            result = await query.GetUserIdentity(username);
             Console.WriteLine(result);
-            //if (result is null)
-            //    return new NotFoundResult();
+            if (result=="0")
+                return new NotFoundResult();
             return new OkObjectResult(result);
             
         }

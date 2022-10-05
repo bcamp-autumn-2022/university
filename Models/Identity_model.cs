@@ -7,7 +7,7 @@ namespace university
     public class Identity
     {
 
-        public Int32? IdentityValue { get; set; }
+        //public Int32? IdentityValue { get; set; }
         internal Database? Db { get; set; }
         public Identity()
         {
@@ -20,32 +20,40 @@ namespace university
 
         public async Task<string> GetUserIdentity(string username)
         {
-            using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"select identity from user where username=@username";
-            cmd.Parameters.Add(new MySqlParameter
+            try
             {
-                ParameterName = "@username",
-                DbType = DbType.String,
-                Value = username,
-            });
-            var result = await ReturnIdentityAsync(await cmd.ExecuteReaderAsync());
-           
-            return result;
+                using var cmd = Db.Connection.CreateCommand();
+                cmd.CommandText = @"select identity from user where username=@username";
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@username",
+                    DbType = DbType.String,
+                    Value = username,
+                });
+                string result;
+                result = await ReturnIdentityAsync(await cmd.ExecuteReaderAsync());
+                return result;
+            }
+            catch (System.Exception)
+            {
+
+                return null;
+            }
         }
 
 
         private async Task<string> ReturnIdentityAsync(DbDataReader reader)
         {
-            var objectIdentity=new Identity();
+            string stringIdentity = "";
             using (reader)
             {
 
                 await reader.ReadAsync();
-                objectIdentity.IdentityValue=reader.GetInt32(0);
+                stringIdentity = reader.GetInt32(0).ToString();
 
             }
 
-            return objectIdentity.IdentityValue.ToString();
+            return stringIdentity;
         }
 
 
